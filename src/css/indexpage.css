@@ -1,0 +1,13 @@
+.datePick {
+  padding: 0 0 0.5rem 1rem;
+  display: inline-block;
+}
+.datePick .picker {
+  margin-right: 1rem;
+}
+.indexPage .headline {
+  display: inline-block;
+}
+.indexPage .header {
+  margin-top: 0.5rem;
+}

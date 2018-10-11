@@ -1,0 +1,17 @@
+.datasoureAvatar {
+  position: relative;
+  min-height: 3rem;
+  text-align: center;
+}
+.datasoureAvatar .rightDivider {
+  background: silver;
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  top: 0px;
+  right: -0.5rem;
+}
+.errorReport td,
+.errorReport th {
+  padding: 4px 6px 4px 24px;
+}

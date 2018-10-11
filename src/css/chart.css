@@ -1,0 +1,11 @@
+.chart {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.queryName {
+  position: relative;
+}
+.datasourceChart {
+  /*   height: 170px; */
+  /*   wid?th: 400px; */
+}

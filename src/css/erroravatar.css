@@ -1,0 +1,15 @@
+.errorAvatar {
+  position: relative;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-height: 3rem;
+}
+
+.errorAvatar .rightBorder {
+  position: absolute;
+  width: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  height: 87%;
+  top: 8%;
+  left: 0px;
+}

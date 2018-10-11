@@ -1,0 +1,13 @@
+.datasourceStat .header {
+  padding: 0.5rem 1rem;
+}
+.datasourceStat .chart {
+  padding: 0.5rem 0 0 0;
+}
+
+.datasourceStat .name {
+  float: left;
+}
+.datasourceStat .avatar {
+  float: right;
+}

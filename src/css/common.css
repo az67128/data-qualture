@@ -1,0 +1,107 @@
+body {
+  padding: 0;
+  margin: 0;
+  background: #fafafa;
+  font-family: Lato;
+}
+.page .fixedProgress {
+  position: fixed;
+  top: 64px;
+  left: 0px;
+  height: 5px;
+  width: 100%;
+}
+.logo {
+  width: 40px;
+  padding-right: 1rem;
+}
+.paper {
+  padding: 1rem;
+  /*   margin: 1rem; */
+}
+.appBar,
+.appBar .toolBar {
+  height: 64px;
+}
+.fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+.headline {
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+.spacer {
+  height: 1rem;
+}
+.notDisplay {
+  display: none;
+}
+
+.overflowHidden {
+  overflow: hidden;
+}
+.relative {
+  position: relative;
+}
+.center {
+  text-align: center;
+}
+.flexGrow {
+  flex-grow: 1;
+}
+.padding1rem {
+  padding: 1rem;
+}
+.clear {
+  clear: both;
+}
+.errorBadge.positive {
+  background: #8bc34a;
+
+  font-weight: lighter;
+}
+.errorBadge.negative {
+  background: #ff7961;
+
+  font-weight: lighter;
+}
+.errorAvatar .errorBadge {
+  border-radius: 4px;
+  color: white;
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+}
+.datasourceStat .errorBadge,
+.datasourceTable .errorBadge,
+.table .errorBadge {
+  font-size: 0.7rem;
+  color: white;
+  line-height: initial;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+.textAvatar {
+  border: 2px solid white;
+}
+.linkAvatar {
+  display: inline-block;
+}
+
+.linkAvatar a {
+  text-decoration: none;
+}
+.linkAvatar a {
+  background: none;
+}
+.paper .userChip {
+  cursor: pointer;
+}
+.userChip {
+  margin-right: 0.2rem;
+  text-decoration: none;
+}
+.userChip:hover {
+  text-decoration: underline;
+}

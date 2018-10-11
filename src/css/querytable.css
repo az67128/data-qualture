@@ -1,0 +1,13 @@
+.datasourceTable .table {
+  width: 100%;
+}
+.table a {
+  color: #3d5afe;
+  text-decoration: none;
+}
+.table a:hover {
+  text-decoration: underline;
+}
+.table a:visited {
+  color: #2196f3;
+}
