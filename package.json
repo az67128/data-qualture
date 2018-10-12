@@ -1,7 +1,7 @@
 {
-  "name": "dqs",
+  "name": "data-qualture",
   "version": "1.0.0",
-  "description": "Data Quality Submarine",
+  "description": "Data Qualture",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
