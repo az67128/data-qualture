@@ -17,6 +17,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import PostponeIcon from "@material-ui/icons/Update";
 import RefreshIcon from "@material-ui/icons/Loop";
+import DownloadIcon from "@material-ui/icons/GetApp";
+import { saveToExcel } from "../helper/excel";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 
 function getHeaders(header) {
@@ -134,7 +136,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, executeQuery } = props;
+  const { numSelected, classes, executeQuery, saveToExcel } = props;
 
   return (
     <Toolbar
@@ -162,11 +164,18 @@ let EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Execute Query">
-            <IconButton aria-label="Execute Query" onClick={executeQuery}>
-              <RefreshIcon />
-            </IconButton>
-          </Tooltip>
+          <div className="errorReportToolbar">
+            <Tooltip title="Execute Query">
+              <IconButton aria-label="Execute Query" onClick={executeQuery}>
+                <RefreshIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Download to excel">
+              <IconButton aria-label="Download to excel" onClick={saveToExcel}>
+                <DownloadIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
         )}
       </div>
     </Toolbar>
@@ -272,6 +281,9 @@ class EnhancedTable extends React.Component {
         <EnhancedTableToolbar
           numSelected={selected.length}
           executeQuery={executeQuery}
+          saveToExcel={() => {
+            saveToExcel(this.props.error_report, this.props.query_name);
+          }}
         />
         <div className={classes.tableWrapper}>
           <Table className="errorReport" aria-labelledby="tableTitle">

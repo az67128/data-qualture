@@ -105,3 +105,12 @@ body {
 .userChip:hover {
   text-decoration: underline;
 }
+.snackBar div {
+  background: #549beb;
+  width: 100%;
+  text-align: center;
+}
+
+.errorReportToolbar {
+  min-width: 100px;
+}
