@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import RefreshIcon from "@material-ui/icons/Loop";
+import DownloadIcon from "@material-ui/icons/GetApp";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -26,9 +27,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
-
 import "../css/query.css";
-
 export default class Query extends React.Component {
   state = {
     query: {
@@ -160,7 +159,6 @@ export default class Query extends React.Component {
       </div>
     );
   }
-
   toggleHint = () => {
     this.setState(prevState => {
       return {
