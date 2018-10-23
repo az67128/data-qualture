@@ -173,7 +173,6 @@ export default class Query extends React.Component {
       </div>
     )
   }
-
   toggleHint = () => {
     this.setState(prevState => {
       return {

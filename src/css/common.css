@@ -110,9 +110,9 @@ body {
   width: 100%;
   text-align: center;
 }
-
 .errorReportToolbar {
   min-width: 100px;
+
 }
 .listHeader {
   margin-right: 40px;
@@ -125,3 +125,4 @@ body {
   float: right;
   margin-top: 0.5rem;
 }
+
