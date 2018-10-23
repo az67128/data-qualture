@@ -5,16 +5,19 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@material-ui/core": "3.1.0",
+    "@material-ui/core": "3.2.2",
     "@material-ui/icons": "3.0.1",
-    "chart.js": "2.7.2",
+    "chart.js": "2.7.3",
+    "exceljs": "1.6.2",
+    "file-saver": "2.0.0-rc.4",
     "js-sha256": "0.9.0",
-    "react": "16.4.2",
+    "react": "16.5.2",
     "react-chartjs-2": "2.7.4",
-    "react-dom": "16.4.2",
+    "react-dom": "16.5.2",
     "react-router-dom": "4.3.1",
-    "react-scripts": "1.1.4",
-    "react-select": "2.0.0"
+    "react-scripts": "2.0.5",
+    "react-select": "2.1.0",
+    "table2excel.js": "0.6.7"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,22 +1,23 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import StatItem from "../component/StatItem";
+import React from "react"
+import Grid from "@material-ui/core/Grid"
+import StatItem from "../component/StatItem"
 
 export default class StatGrid extends React.Component {
   state = {
     xs: 12
-  };
+  }
   render() {
-    const { xs } = this.state;
+    const { xs } = this.state
     const {
       data,
+      entity,
       idPropName,
       nameProp,
       chartDataSp,
       withAvatar,
       pictureProp
-    } = this.props;
-    console.log(data);
+    } = this.props
+    console.log(data)
     return (
       <div className={xs < 12 ? "padding1rem" : ""}>
         <Grid container spacing={24}>
@@ -29,6 +30,7 @@ export default class StatGrid extends React.Component {
                 key={item[idPropName]}
               >
                 <StatItem
+                  entity={entity}
                   name={item[nameProp]}
                   withAvatar={withAvatar}
                   query_count={item.query_count}
@@ -40,32 +42,32 @@ export default class StatGrid extends React.Component {
                   picture_link={withAvatar && item[pictureProp]}
                 />
               </Grid>
-            );
+            )
           })}
         </Grid>
       </div>
-    );
+    )
   }
   componentDidMount() {
-    window.scrollTo(0, 0);
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
+    window.scrollTo(0, 0)
+    this.updateDimensions()
+    window.addEventListener("resize", this.updateDimensions)
   }
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
+    window.removeEventListener("resize", this.updateDimensions)
   }
   updateDimensions = () => {
-    const width = window.innerWidth;
-    let xs = 6;
+    const width = window.innerWidth
+    let xs = 6
     if (width <= 550) {
-      xs = 12;
+      xs = 12
     } else if (width <= 1100) {
-      xs = 6;
+      xs = 6
     } else if (width <= 1650) {
-      xs = 4;
+      xs = 4
     } else {
-      xs = 3;
+      xs = 3
     }
-    this.setState({ xs: xs });
-  };
+    this.setState({ xs: xs })
+  }
 }

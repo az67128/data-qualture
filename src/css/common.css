@@ -110,3 +110,19 @@ body {
   width: 100%;
   text-align: center;
 }
+.errorReportToolbar {
+  min-width: 100px;
+
+}
+.listHeader {
+  margin-right: 40px;
+}
+.searchField {
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+.queryList .searchButton {
+  width: 50px;
+  float: right;
+  margin-top: 0.5rem;
+}
+

@@ -33,7 +33,7 @@ export default class AppMenu extends React.Component {
             <ListItem
               button
               component={Link}
-              to={"/mydq"}
+              to={"/person/" + user.user_id}
               onClick={toggleDrawer}
             >
               <ListItemIcon>
