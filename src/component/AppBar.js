@@ -41,7 +41,14 @@ function ButtonAppBar(props) {
           <Link to="/">
             <img alt="" src={LOGO_IMG} className="logo" />
           </Link>
-          <Typography variant="title" color="inherit" className={classes.flex}>
+          <Typography
+            style={{ textDecoration: "none" }}
+            component={Link}
+            to="/"
+            variant="title"
+            color="inherit"
+            className={classes.flex}
+          >
             Data Qualture
           </Typography>
           {user ? (

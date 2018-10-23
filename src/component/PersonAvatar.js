@@ -15,7 +15,7 @@ export default function PersonAvatar(props) {
         className={picture ? null : "textAvatar"}
         src={picture ? picture : null}
         component={Link}
-        to={user.person_id ? "/mydq/" + user.person_id : "/profile"}
+        to={user.person_id ? "/person/" + user.person_id : "/profile"}
       >
         {!picture ? prepareAvatar(user.person_name) : null}
       </Avatar>

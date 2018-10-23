@@ -1,25 +1,25 @@
-import React from "react";
-import AppBar from "./AppBar";
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import { theme, PRIMARY_COLOR } from "../constant/common";
-import Page from "./Page";
-import Drawer from "./Drawer";
-import { isJwtExpired, decodeJwt } from "../helper/common";
-import Snackbar from "@material-ui/core/Snackbar";
-import Slide from "@material-ui/core/Slide";
+import React from "react"
+import AppBar from "./AppBar"
+import { MuiThemeProvider } from "@material-ui/core/styles"
+import { theme, PRIMARY_COLOR } from "../constant/common"
+import Page from "./Page"
+import Drawer from "./Drawer"
+import { isJwtExpired, decodeJwt } from "../helper/common"
+import Snackbar from "@material-ui/core/Snackbar"
+import Slide from "@material-ui/core/Slide"
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isDrawerOpen: false,
       user: null,
       isSnackbarOpen: false,
       snackMessage: ""
-    };
+    }
   }
 
   render() {
-    const { isDrawerOpen, user, isSnackbarOpen, snackMessage } = this.state;
+    const { isDrawerOpen, user, isSnackbarOpen, snackMessage } = this.state
     return (
       <MuiThemeProvider theme={theme}>
         <div>
@@ -48,47 +48,47 @@ export default class extends React.Component {
           message={snackMessage}
         />
       </MuiThemeProvider>
-    );
+    )
   }
   logout = () => {
-    this.setState({ user: null });
-    localStorage.setItem("dqRefreshToken", "");
+    this.setState({ user: null })
+    localStorage.setItem("dqRefreshToken", "")
     //this.displayUser();
-  };
+  }
   login = () => {
-    this.displayUser();
-  };
+    this.displayUser()
+  }
   displayUser = () => {
-    const jwt = localStorage.getItem("dqRefreshToken");
-    if (isJwtExpired(jwt)) return;
-    const decoded = decodeJwt(jwt);
+    const jwt = localStorage.getItem("dqRefreshToken")
+    if (isJwtExpired(jwt)) return
+    const decoded = decodeJwt(jwt)
 
     this.setState({
       user: {
-        person_name: decoded.person_name,
+        ...decoded,
         picture_link: decodeURIComponent(decoded.picture_link)
       }
-    });
-  };
+    })
+  }
   componentDidMount() {
-    this.displayUser();
-    window.addEventListener("snackBarMessage", this.snackBarMessage);
+    this.displayUser()
+    window.addEventListener("snackBarMessage", this.snackBarMessage)
   }
   componentWillUnmount() {
-    window.removeEventListener("snackBarMessage", this.snackBarMessage);
+    window.removeEventListener("snackBarMessage", this.snackBarMessage)
   }
   handleSnackbarClose = () => {
-    this.setState({ isSnackbarOpen: false });
-  };
+    this.setState({ isSnackbarOpen: false })
+  }
   snackBarMessage = e => {
     this.setState({
       isSnackbarOpen: true,
       snackMessage: e.detail
-    });
-  };
+    })
+  }
   toggleDrawer = () => {
     this.setState(prevState => {
-      return { isDrawerOpen: !prevState.isDrawerOpen };
-    });
-  };
+      return { isDrawerOpen: !prevState.isDrawerOpen }
+    })
+  }
 }
