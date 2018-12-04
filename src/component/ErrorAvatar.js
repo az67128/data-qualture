@@ -7,14 +7,14 @@ export default function ErrorAvatar(props) {
     <div className="errorAvatar">
       <div className="rightBorder" />
       <div>
-        <Typography variant="body2" align="center">
+        <Typography variant="body1" align="center">
           {error_count} error{error_count == 1 ? "" : "s"}
         </Typography>
       </div>
       <div>
         {parseFloat(error_delta) !== 0 && (
           <Typography
-            variant="body1"
+            variant="body2"
             align="center"
             className={
               "errorBadge " + (error_delta > 0 ? "negative" : "positive")

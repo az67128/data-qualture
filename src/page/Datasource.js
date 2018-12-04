@@ -1,21 +1,21 @@
-import React from "react"
-import "../css/datasourcestat.css"
-import Typography from "@material-ui/core/Typography"
-import StatGrid from "../component/StatGrid"
-import { ajax } from "../helper/common"
-import LinearProgress from "@material-ui/core/LinearProgress"
+import React from "react";
+import "../css/datasourcestat.css";
+import Typography from "@material-ui/core/Typography";
+import StatGrid from "../component/StatGrid";
+import { ajax } from "../helper/common";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default class Datasource extends React.Component {
   state = {
     isLoading: false,
     datasourceList: []
-  }
+  };
   render() {
-    const { isLoading, datasourceList, xs } = this.state
+    const { isLoading, datasourceList, xs } = this.state;
     return (
       <div className="overflowHidden">
         {isLoading && <LinearProgress className="fixedProgress" />}
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Datasources
         </Typography>
         <StatGrid
@@ -26,16 +26,16 @@ export default class Datasource extends React.Component {
           entity="datasource"
         />
       </div>
-    )
+    );
   }
   componentDidMount() {
-    this.getDatasourceList()
+    this.getDatasourceList();
   }
 
   getDatasourceList = () => {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
     ajax({ sp: "get_datasource_list_with_stat" }).then(data => {
-      this.setState({ datasourceList: data, isLoading: false })
-    })
-  }
+      this.setState({ datasourceList: data, isLoading: false });
+    });
+  };
 }

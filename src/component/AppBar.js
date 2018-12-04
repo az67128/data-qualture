@@ -45,7 +45,7 @@ function ButtonAppBar(props) {
             style={{ textDecoration: "none" }}
             component={Link}
             to="/"
-            variant="title"
+            variant="h6"
             color="inherit"
             className={classes.flex}
           >

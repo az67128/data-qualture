@@ -2,7 +2,8 @@ body {
   padding: 0;
   margin: 0;
   background: #fafafa;
-  font-family: Lato;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 0.875rem;
 }
 .page .fixedProgress {
   position: fixed;
@@ -110,9 +111,9 @@ body {
   width: 100%;
   text-align: center;
 }
+
 .errorReportToolbar {
   min-width: 100px;
-
 }
 .listHeader {
   margin-right: 40px;
@@ -125,4 +126,3 @@ body {
   float: right;
   margin-top: 0.5rem;
 }
-

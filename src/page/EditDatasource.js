@@ -1,12 +1,11 @@
-import React from "react"
-import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
-import Dialog from "@material-ui/core/Dialog"
-import DialogActions from "@material-ui/core/DialogActions"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import { ajax, dispathSnackbarMessage } from "../helper/common"
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { ajax, dispathSnackbarMessage } from "../helper/common";
 export default class EditDatasource extends React.Component {
   state = {
     isModified: false,
@@ -17,15 +16,15 @@ export default class EditDatasource extends React.Component {
     },
     isLoading: true,
     isFormChecke: false
-  }
+  };
   componentDidMount() {
     if (this.props.editItem.datasource_id) {
-      this.setState({ datasource: this.props.editItem })
+      this.setState({ datasource: this.props.editItem });
     }
   }
   render() {
-    const { isOpen, handleClose } = this.props
-    const { datasource, isModified, isLoading, isFormChecked } = this.state
+    const { isOpen, handleClose } = this.props;
+    const { datasource, isModified, isLoading, isFormChecked } = this.state;
 
     return (
       <div>
@@ -64,37 +63,37 @@ export default class EditDatasource extends React.Component {
           </DialogActions>
         </Dialog>
       </div>
-    )
+    );
   }
   saveDatasource = () => {
-    const { datasource } = this.state
+    const { datasource } = this.state;
     if (!datasource.datasource_name) {
-      this.setState({ isFormChecked: true })
-      return
+      this.setState({ isFormChecked: true });
+      return;
     }
-    this.setState({ isoading: true })
+    this.setState({ isoading: true });
     ajax({
       sp: "update_datasource",
       remote_user: true,
       ...this.state.datasource
     })
       .then(data => {
-        this.setState({ isoading: false })
-        this.props.handleClose(true)
+        this.setState({ isoading: false });
+        this.props.handleClose(true);
       })
       .catch(err => {
-        dispathSnackbarMessage("Not authoized")
-        this.setState({ isLoading: false })
-      })
-  }
+        dispathSnackbarMessage("Not authoized");
+        this.setState({ isLoading: false });
+      });
+  };
 
   handleChange = property => event => {
-    const value = event.target.value
+    const value = event.target.value;
     this.setState(prevState => {
       return {
         isModified: true,
         datasource: { ...prevState.datasource, [property]: value }
-      }
-    })
-  }
+      };
+    });
+  };
 }

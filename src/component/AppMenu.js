@@ -1,20 +1,21 @@
-import React from "react"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import Divider from "@material-ui/core/Divider"
-import DatasourceStatIcon from "@material-ui/icons/GolfCourse"
-import TeamStatIcon from "@material-ui/icons/Group"
-import QueryListIcon from "@material-ui/icons/ListAlt"
-import MyDqIcon from "@material-ui/icons/Person"
-import TargetIcon from "@material-ui/icons/Map"
-import DatasourceIcon from "@material-ui/icons/Landscape"
-import { Link } from "react-router-dom"
+import React from "react";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import DatasourceStatIcon from "@material-ui/icons/GolfCourse";
+import TeamStatIcon from "@material-ui/icons/Group";
+import QueryListIcon from "@material-ui/icons/ListAlt";
+import MyDqIcon from "@material-ui/icons/Person";
+import TargetIcon from "@material-ui/icons/Map";
+import DatasourceIcon from "@material-ui/icons/Landscape";
+import HelpIcon from "@material-ui/icons/Help";
+import { Link } from "react-router-dom";
 
 export default class AppMenu extends React.Component {
   render() {
-    const { toggleDrawer, user } = this.props
+    const { toggleDrawer, user } = this.props;
     return (
       <div>
         <List component="nav">
@@ -57,7 +58,12 @@ export default class AppMenu extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Datasource stat" />
           </ListItem>
-          <ListItem button component={Link} to={"/team"} onClick={toggleDrawer}>
+          <ListItem
+            button
+            component={Link}
+            to={"/team/" + (user && user.user_id ? user.user_id : "")}
+            onClick={toggleDrawer}
+          >
             <ListItemIcon>
               <TeamStatIcon />
             </ListItemIcon>
@@ -87,7 +93,14 @@ export default class AppMenu extends React.Component {
           </ListItemIcon>
           <ListItemText primary="Datasources" />
         </ListItem>
+        <Divider />
+        <ListItem button component={Link} to={"/help"} onClick={toggleDrawer}>
+          <ListItemIcon>
+            <HelpIcon />
+          </ListItemIcon>
+          <ListItemText primary="Help" />
+        </ListItem>
       </div>
-    )
+    );
   }
 }

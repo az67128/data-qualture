@@ -1,13 +1,13 @@
-import React from "react"
-import DatasourceChart from "../component/DatasourceChart"
+import React from "react";
+import DatasourceChart from "../component/DatasourceChart";
 
-import BurndownChart from "../component/BurndownChart"
-import Paper from "@material-ui/core/Paper"
-import Typography from "@material-ui/core/Typography"
-import { ajax } from "../helper/common"
-import LinearProgress from "@material-ui/core/LinearProgress"
-import TextField from "@material-ui/core/TextField"
-import "../css/indexpage.css"
+import BurndownChart from "../component/BurndownChart";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import { ajax } from "../helper/common";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import TextField from "@material-ui/core/TextField";
+import "../css/indexpage.css";
 export default class Index extends React.Component {
   state = {
     datasource_error_chart: [],
@@ -15,7 +15,7 @@ export default class Index extends React.Component {
     isLoading: false,
     start_date: "",
     end_date: ""
-  }
+  };
   render() {
     const {
       datasource_error_chart,
@@ -23,12 +23,12 @@ export default class Index extends React.Component {
       isLoading,
       start_date,
       end_date
-    } = this.state
+    } = this.state;
     return (
       <div className="indexPage">
         {isLoading && <LinearProgress className="fixedProgress" />}
         <div className="header">
-          <Typography variant="headline" className="headline">
+          <Typography variant="h5" className="headline">
             Data quality trend
           </Typography>
           <div className="datePick">
@@ -52,22 +52,22 @@ export default class Index extends React.Component {
           <DatasourceChart data={datasource_error_chart} />
         </Paper>
 
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Burndown chart
         </Typography>
         <Paper className="paper">
           <BurndownChart data={burndown_error_chart} />
         </Paper>
       </div>
-    )
+    );
   }
   componentDidMount() {
-    window.scrollTo(0, 0)
-    this.setDefaultDate()
-    setTimeout(this.getDatasourceChart, 100)
+    window.scrollTo(0, 0);
+    this.setDefaultDate();
+    setTimeout(this.getDatasourceChart, 100);
   }
   getDatasourceChart = () => {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
     Promise.all([
       ajax({
         sp: "get_datasource_error_chart",
@@ -77,7 +77,7 @@ export default class Index extends React.Component {
         this.setState({
           datasource_error_chart: data,
           isLoading: false
-        })
+        });
       }),
       ajax({
         sp: "get_burndown_chart",
@@ -87,27 +87,27 @@ export default class Index extends React.Component {
         this.setState({
           burndown_error_chart: data,
           isLoading: false
-        })
+        });
       })
     ]).then(() => {
       this.setState({
         isLoading: false
-      })
-    })
-  }
+      });
+    });
+  };
   setDefaultDate = () => {
-    let start_date = new Date()
-    start_date.setMonth(start_date.getMonth() - 1)
+    let start_date = new Date();
+    start_date.setMonth(start_date.getMonth() - 1);
     this.setState({
       start_date: start_date.toISOString().slice(0, 10),
       end_date: new Date().toISOString().slice(0, 10)
-    })
-  }
+    });
+  };
   handleChange = prop => event => {
-    const value = event.target.value
+    const value = event.target.value;
     this.setState({
       [prop]: value
-    })
-    setTimeout(this.getDatasourceChart, 100)
-  }
+    });
+    setTimeout(this.getDatasourceChart, 100);
+  };
 }

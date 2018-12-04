@@ -151,11 +151,11 @@ let EnhancedTableToolbar = props => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
+          <Typography color="inherit" variant="subtitle1">
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="title" id="tableTitle">
+          <Typography variant="h6" id="tableTitle">
             Nutrition
           </Typography>
         )}
@@ -299,7 +299,7 @@ class EnhancedTable extends React.Component {
                             n.error_delta
                           ) : (
                             <Typography
-                              variant="body1"
+                              variant="body2"
                               align="center"
                               className={
                                 "errorBadge " +

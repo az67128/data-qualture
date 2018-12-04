@@ -28,7 +28,7 @@ export default class TargetList extends React.Component {
     return (
       <div>
         {isLoading && <LinearProgress className="fixedProgress" />}
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Targets
         </Typography>
 

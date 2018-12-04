@@ -1,14 +1,14 @@
-import React from "react"
-import Paper from "@material-ui/core/Paper"
-import Typography from "@material-ui/core/Typography"
-import Spacer from "../component/Spacer"
-import { ajax } from "../helper/common"
-import TextField from "@material-ui/core/TextField"
-import Button from "@material-ui/core/Button"
+import React from "react";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Spacer from "../component/Spacer";
+import { ajax } from "../helper/common";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
-import LinearProgress from "@material-ui/core/LinearProgress"
-import { sha256 } from "js-sha256"
-import { Redirect } from "react-router-dom"
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { sha256 } from "js-sha256";
+import { Redirect } from "react-router-dom";
 export default class Login extends React.Component {
   state = {
     isRegistring: false,
@@ -18,16 +18,16 @@ export default class Login extends React.Component {
       password: "",
       name: ""
     }
-  }
+  };
   render() {
-    const { isRegistring, user, isLoading } = this.state
+    const { isRegistring, user, isLoading } = this.state;
     if (this.props.user) {
-      return <Redirect to="/mydq" />
+      return <Redirect to={"/person/" + this.props.user.user_id} />;
     }
     return (
       <div>
         {isLoading && <LinearProgress className="fixedProgress" />}
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Login
         </Typography>
         <Paper className="paper center">
@@ -98,30 +98,30 @@ export default class Login extends React.Component {
           )}
         </Paper>
       </div>
-    )
+    );
   }
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
   swithLogin = () => {
     this.setState(prevState => {
-      return { isRegistring: !prevState.isRegistring }
-    })
-  }
+      return { isRegistring: !prevState.isRegistring };
+    });
+  };
   login = (isRegistring, provider) => {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
 
-    const { user } = this.state
-    const loginParams = {}
+    const { user } = this.state;
+    const loginParams = {};
     if (provider === "password") {
-      loginParams.login = user.email
-      loginParams.password_hash = sha256(user.password)
+      loginParams.login = user.email;
+      loginParams.password_hash = sha256(user.password);
     }
     //register if new user
     new Promise((resolve, reject) => {
       if (!isRegistring) {
-        resolve(true)
-        return
+        resolve(true);
+        return;
       }
       ajax({
         sp: "register_user",
@@ -132,11 +132,11 @@ export default class Login extends React.Component {
         password_hash: sha256(user.password)
       }).then(result => {
         if (result[0] && result[0].result === "User created") {
-          resolve(true)
+          resolve(true);
         } else {
-          reject(result[0].result)
+          reject(result[0].result);
         }
-      })
+      });
     })
       .then(result => {
         return ajax(
@@ -147,23 +147,23 @@ export default class Login extends React.Component {
           },
           { path: "auth" }
         ).then(data => {
-          this.props.login()
-          this.setState({ isLoading: false })
-        })
+          this.props.login();
+          this.setState({ isLoading: false });
+        });
       })
       .catch(err => {
-        this.setState({ isLoading: false })
-        setTimeout(() => console.log(err), 100)
-      })
-  }
+        this.setState({ isLoading: false });
+        setTimeout(() => console.log(err), 100);
+      });
+  };
   handleChange = property => event => {
     const value = event.target.checked
       ? event.target.checked
-      : event.target.value
+      : event.target.value;
     this.setState(prevState => {
       return {
         user: { ...prevState.user, [property]: value }
-      }
-    })
-  }
+      };
+    });
+  };
 }

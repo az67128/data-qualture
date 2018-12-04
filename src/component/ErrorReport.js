@@ -1,56 +1,60 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import PostponeIcon from "@material-ui/icons/Update";
-import RefreshIcon from "@material-ui/icons/Loop";
-import DownloadIcon from "@material-ui/icons/GetApp";
-import { saveToExcel } from "../helper/excel";
-import { lighten } from "@material-ui/core/styles/colorManipulator";
-
+import React from "react"
+import classNames from "classnames"
+import PropTypes from "prop-types"
+import { withStyles } from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableHead from "@material-ui/core/TableHead"
+import TablePagination from "@material-ui/core/TablePagination"
+import TableRow from "@material-ui/core/TableRow"
+import TableSortLabel from "@material-ui/core/TableSortLabel"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import Paper from "@material-ui/core/Paper"
+import Checkbox from "@material-ui/core/Checkbox"
+import IconButton from "@material-ui/core/IconButton"
+import Tooltip from "@material-ui/core/Tooltip"
+import PostponeIcon from "@material-ui/icons/Update"
+import RefreshIcon from "@material-ui/icons/Loop"
+import DownloadIcon from "@material-ui/icons/GetApp"
+import { saveToExcel } from "../helper/excel"
+import { lighten } from "@material-ui/core/styles/colorManipulator"
+import Dialog from "@material-ui/core/Dialog"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
+import Button from "@material-ui/core/Button"
 function getHeaders(header) {
-  const headers = [];
+  const headers = []
   Object.keys(header).forEach(item => {
     if (item !== "is_new" && item !== "query_error_id" && item !== "error_id") {
-      headers.push(item);
+      headers.push(item)
     }
-  });
-  return headers;
+  })
+  return headers
 }
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
-    return -1;
+    return -1
   }
   if (b[orderBy] > a[orderBy]) {
-    return 1;
+    return 1
   }
-  return 0;
+  return 0
 }
 
 function getSorting(order, orderBy) {
   return order === "desc"
     ? (a, b) => desc(a, b, orderBy)
-    : (a, b) => -desc(a, b, orderBy);
+    : (a, b) => -desc(a, b, orderBy)
 }
 
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
+    this.props.onRequestSort(event, property)
+  }
 
   render() {
     const {
@@ -60,8 +64,8 @@ class EnhancedTableHead extends React.Component {
       numSelected,
       rowCount,
       header
-    } = this.props;
-    const rows = getHeaders(header);
+    } = this.props
+    const rows = getHeaders(header)
     return (
       <TableHead>
         <TableRow>
@@ -93,11 +97,11 @@ class EnhancedTableHead extends React.Component {
                   </TableSortLabel>
                 </Tooltip>
               </TableCell>
-            );
+            )
           }, this)}
         </TableRow>
       </TableHead>
-    );
+    )
   }
 }
 
@@ -108,7 +112,7 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired
-};
+}
 
 const toolbarStyles = theme => ({
   root: {
@@ -133,10 +137,10 @@ const toolbarStyles = theme => ({
   title: {
     flex: "0 0 auto"
   }
-});
+})
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, executeQuery, saveToExcel } = props;
+  const { numSelected, classes, executeQuery, saveToExcel, postpone } = props
 
   return (
     <Toolbar
@@ -146,11 +150,11 @@ let EnhancedTableToolbar = props => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
+          <Typography color="inherit" variant="subtitle1">
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="title" id="tableTitle">
+          <Typography variant="h6" id="tableTitle">
             Error Report
           </Typography>
         )}
@@ -159,7 +163,7 @@ let EnhancedTableToolbar = props => {
       <div className={classes.actions}>
         {numSelected > 0 ? (
           <Tooltip title="Pospone errors">
-            <IconButton aria-label="Pospone">
+            <IconButton aria-label="Pospone" onClick={postpone}>
               <PostponeIcon />
             </IconButton>
           </Tooltip>
@@ -179,15 +183,15 @@ let EnhancedTableToolbar = props => {
         )}
       </div>
     </Toolbar>
-  );
-};
+  )
+}
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired
-};
+}
 
-EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
+EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
 
 const styles = theme => ({
   root: {
@@ -198,7 +202,7 @@ const styles = theme => ({
   tableWrapper: {
     overflowX: "auto"
   }
-});
+})
 
 class EnhancedTable extends React.Component {
   state = {
@@ -206,83 +210,96 @@ class EnhancedTable extends React.Component {
     orderBy: "calories",
     selected: [],
     page: 0,
-    rowsPerPage: 5
-  };
+    rowsPerPage: 5,
+    isModalOpen: false
+  }
 
   handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = "desc";
+    const orderBy = property
+    let order = "desc"
 
     if (this.state.orderBy === property && this.state.order === "desc") {
-      order = "asc";
+      order = "asc"
     }
 
-    this.setState({ order, orderBy });
-  };
+    this.setState({ order, orderBy })
+  }
 
   handleSelectAllClick = event => {
-    const data = this.parseErrorReport();
+    const data = this.parseErrorReport()
     if (event.target.checked) {
-      this.setState(state => ({ selected: data.map(n => n.query_error_id) }));
-      return;
+      this.setState(state => ({ selected: data.map(n => n.query_error_id) }))
+      return
     }
-    this.setState({ selected: [] });
-  };
+    this.setState({ selected: [] })
+  }
 
   handleClick = (event, id) => {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
+    const { selected } = this.state
+    const selectedIndex = selected.indexOf(id)
+    let newSelected = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
+      newSelected = newSelected.concat(selected, id)
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
+      newSelected = newSelected.concat(selected.slice(1))
     } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(selected.slice(0, -1))
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1)
-      );
+      )
     }
 
-    this.setState({ selected: newSelected });
-  };
+    this.setState({ selected: newSelected })
+  }
 
   handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
+    this.setState({ page })
+  }
 
   handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
+    this.setState({ rowsPerPage: event.target.value })
+  }
   parseErrorReport = () => {
     return this.props.error_report.map(row => {
       return {
         ...JSON.parse(row.error_report),
         query_error_id: row.query_error_id,
         is_new: row.is_new
-      };
-    });
-  };
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
-
+      }
+    })
+  }
+  isSelected = id => this.state.selected.indexOf(id) !== -1
+  postpone = () => {
+    this.setState({
+      isModalOpen: false,
+      selected: []
+    })
+    this.props.postpone(this.state.selected)
+  }
+  toggleModal = () => {
+    this.setState(prevState => {
+      return { isModalOpen: !prevState.isModalOpen }
+    })
+  }
   render() {
-    if (this.props.error_report.length === 0) return null;
-    const { classes, executeQuery } = this.props;
-    const { order, orderBy, selected, rowsPerPage, page } = this.state;
-    const data = this.parseErrorReport();
+    if (this.props.error_report.length === 0) return null
+    const { classes, executeQuery } = this.props
+    const { order, orderBy, selected, rowsPerPage, page } = this.state
+    const data = this.parseErrorReport()
     const emptyRows =
-      rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+      rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
     return (
       <Paper className={classes.root}>
         <EnhancedTableToolbar
           numSelected={selected.length}
           executeQuery={executeQuery}
+          postpone={this.toggleModal}
           saveToExcel={() => {
-            saveToExcel(this.props.error_report, this.props.query_name);
+            saveToExcel(this.props.error_report, this.props.query_name)
           }}
         />
         <div className={classes.tableWrapper}>
@@ -301,7 +318,7 @@ class EnhancedTable extends React.Component {
                 .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  const isSelected = this.isSelected(n.query_error_id);
+                  const isSelected = this.isSelected(n.query_error_id)
                   return (
                     <TableRow
                       hover
@@ -322,10 +339,10 @@ class EnhancedTable extends React.Component {
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       {getHeaders(data[0]).map(item => {
-                        return <TableCell key={item}>{n[item]}</TableCell>;
+                        return <TableCell key={item}>{n[item]}</TableCell>
                       })}
                     </TableRow>
-                  );
+                  )
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 49 * emptyRows }}>
@@ -349,13 +366,29 @@ class EnhancedTable extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
+
+        <Dialog open={this.state.isModalOpen} onClose={this.toggleModal}>
+          <DialogContent>
+            <DialogContentText>
+              Do you want to postpone selected errors?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.postpone} color="primary">
+              Yes
+            </Button>
+            <Button onClick={this.toggleModal} color="primary" autoFocus>
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Paper>
-    );
+    )
   }
 }
 
 EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
-export default withStyles(styles)(EnhancedTable);
+export default withStyles(styles)(EnhancedTable)

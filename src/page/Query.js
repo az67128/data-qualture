@@ -27,7 +27,6 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import MenuItem from "@material-ui/core/MenuItem"
-
 import "../css/query.css"
 
 export default class Query extends React.Component {
@@ -97,7 +96,7 @@ export default class Query extends React.Component {
               </div>
             }
             title={
-              <Typography variant="title">
+              <Typography variant="h6">
                 {query.query_name}
                 {query.query_status && query.query_status_id !== 1
                   ? ` [${query.query_status}]`
@@ -126,8 +125,9 @@ export default class Query extends React.Component {
           error_report={error_report}
           executeQuery={this.executeQuery}
           query_name={query.query_name}
+          postpone={this.postpone}
         />
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Errors trend
         </Typography>
 
@@ -173,6 +173,7 @@ export default class Query extends React.Component {
       </div>
     )
   }
+
   toggleHint = () => {
     this.setState(prevState => {
       return {
@@ -251,5 +252,23 @@ export default class Query extends React.Component {
             }
           })
         })
+  }
+  postpone = query_error_ids => {
+    this.setState({ isLoading: true })
+    ajax({
+      sp: "add_exception",
+      query_error_ids: query_error_ids.join(","),
+      remote_user: true,
+      comment: ""
+    }).then(data => {
+      if (data[0].add_exception === "Exception limit reached") {
+        dispathSnackbarMessage("Exception limit reached")
+        this.setState({ isLoading: false })
+        return
+      }
+      dispathSnackbarMessage("Errors postponed")
+
+      this.getData()
+    })
   }
 }

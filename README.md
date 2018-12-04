@@ -1,5 +1,5 @@
 # Data Qualture
-### Data quality tool
+## Data quality tool
 
 1. Allows you to automatically check your data quality.
 2. Social. Each error has a responsible person.

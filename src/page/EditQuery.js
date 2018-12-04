@@ -1,26 +1,26 @@
-import React from "react"
-import Paper from "@material-ui/core/Paper"
-import Typography from "@material-ui/core/Typography"
-import TextField from "@material-ui/core/TextField"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
-import FormHelperText from "@material-ui/core/FormHelperText"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
-import Fab from "../component/Fab"
-import SaveIcon from "@material-ui/icons/Save"
-import Spacer from "../component/Spacer"
-import { ajax, dispathSnackbarMessage } from "../helper/common"
-import { requiredQueryFieds } from "../constant/common"
-import ScheduleControl from "../component/ScheduleControl"
-import LinearProgress from "@material-ui/core/LinearProgress"
-import IconButton from "@material-ui/core/IconButton"
-import BackIcon from "@material-ui/icons/ArrowBack"
-import { Link } from "react-router-dom"
-import Autocomplete from "../component/Autocomplete"
+import React from "react";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Fab from "../component/Fab";
+import SaveIcon from "@material-ui/icons/Save";
+import Spacer from "../component/Spacer";
+import { ajax, dispathSnackbarMessage } from "../helper/common";
+import { requiredQueryFieds } from "../constant/common";
+import ScheduleControl from "../component/ScheduleControl";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import IconButton from "@material-ui/core/IconButton";
+import BackIcon from "@material-ui/icons/ArrowBack";
+import { Link } from "react-router-dom";
+import Autocomplete from "../component/Autocomplete";
 export default class EditQuery extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       query: {
         query_id: 0,
@@ -53,11 +53,11 @@ export default class EditQuery extends React.Component {
       person: [],
       query_status: [],
       isLoading: false
-    }
+    };
   }
   componentDidMount() {
-    window.scrollTo(0, 0)
-    this.getDictionary()
+    window.scrollTo(0, 0);
+    this.getDictionary();
   }
   render() {
     const {
@@ -69,17 +69,18 @@ export default class EditQuery extends React.Component {
       isFormChecked,
       isLoading,
       person
-    } = this.state
+    } = this.state;
     return (
       <div>
         {isLoading && <LinearProgress className="fixedProgress" />}
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           <IconButton
             component={Link}
             to={query.query_id ? "/query/" + query.query_id : "/querylist"}
           >
             <BackIcon />
-          </IconButton>General info
+          </IconButton>
+          General info
         </Typography>
         <Paper className="paper">
           <TextField
@@ -130,7 +131,7 @@ export default class EditQuery extends React.Component {
           </FormHelperText>
         </Paper>
 
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Settings
         </Typography>
         <Paper className="paper">
@@ -153,7 +154,7 @@ export default class EditQuery extends React.Component {
                   <MenuItem value={item.target_id || ""} key={item.target_id}>
                     {item.target_name}
                   </MenuItem>
-                )
+                );
               })}
             </Select>
           </FormControl>
@@ -180,7 +181,7 @@ export default class EditQuery extends React.Component {
                   >
                     {item.datasource_name}
                   </MenuItem>
-                )
+                );
               })}
             </Select>
           </FormControl>
@@ -208,7 +209,7 @@ export default class EditQuery extends React.Component {
                   >
                     {item.query_status}
                   </MenuItem>
-                )
+                );
               })}
             </Select>
           </FormControl>
@@ -241,7 +242,7 @@ export default class EditQuery extends React.Component {
             login, email)], [error_id] to associate person with error
           </FormHelperText>
         </Paper>
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           People
         </Typography>
         <Paper className="paper">
@@ -266,7 +267,7 @@ export default class EditQuery extends React.Component {
             onChange={this.handleQueryChange("informed")}
           />
         </Paper>
-        <Typography variant="headline" className="headline">
+        <Typography variant="h5" className="headline">
           Schedule
         </Typography>
         <Paper className="paper">
@@ -280,26 +281,26 @@ export default class EditQuery extends React.Component {
           </Fab>
         )}
       </div>
-    )
+    );
   }
   formatPeople = people => {
-    if (!people) return null
+    if (!people) return null;
 
     const formattedPeople = people.map(person => {
-      return person.value
-    })
-    return formattedPeople.join(",")
-  }
+      return person.value;
+    });
+    return formattedPeople.join(",");
+  };
   saveQuery = () => {
-    const { query } = this.state
+    const { query } = this.state;
     const isFormValid = requiredQueryFieds.reduce((result, item) => {
-      return !!query[item] && result
-    }, true)
+      return !!query[item] && result;
+    }, true);
     this.setState({
       isFormChecked: true
-    })
+    });
     if (isFormValid) {
-      this.setState({ isLoading: true, isModified: false })
+      this.setState({ isLoading: true, isModified: false });
 
       ajax({
         sp: "update_query",
@@ -310,53 +311,58 @@ export default class EditQuery extends React.Component {
         informed: this.formatPeople(query.informed)
       })
         .then(result => {
+          this.setState(prevState => {
+            return {
+              query: { ...prevState.query, query_id: result[0].update_query }
+            };
+          });
           //console.log(result)
         })
         .catch(err => {
-          this.setState({ isModified: true })
+          this.setState({ isModified: true });
 
-          dispathSnackbarMessage("Not authoized")
-          this.setState({ isLoading: false })
+          dispathSnackbarMessage("Not authoized");
+          this.setState({ isLoading: false });
         })
         .finally(() => {
-          this.setState({ isLoading: false })
-        })
+          this.setState({ isLoading: false });
+        });
     }
-  }
+  };
   getDictionary = () => {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
     Promise.all([
       ajax({ sp: "get_target_list" }).then(data => {
-        return { name: "target", data: data }
+        return { name: "target", data: data };
       }),
       ajax({ sp: "get_datasource_list" }).then(data => {
-        return { name: "datasource", data: data }
+        return { name: "datasource", data: data };
       }),
       ajax({ sp: "get_query_status_list" }).then(data => {
-        return { name: "query_status", data: data }
+        return { name: "query_status", data: data };
       }),
       ajax({ sp: "get_person_list" }).then(data => {
         return {
           name: "person",
           data: data.map(item => {
-            return { value: item.user_id, label: item.person_name }
+            return { value: item.user_id, label: item.person_name };
           })
-        }
+        };
       }),
       this.getQuery()
     ]).then(dictionary => {
       dictionary.forEach(item => {
-        const dict = {}
+        const dict = {};
         if (item) {
-          dict[item.name] = item.data
+          dict[item.name] = item.data;
         }
         this.setState({
           ...dict,
           isLoading: false
-        })
-      })
-    })
-  }
+        });
+      });
+    });
+  };
   getQuery = () => {
     return !this.props.match.params.q_id
       ? null
@@ -372,18 +378,18 @@ export default class EditQuery extends React.Component {
               accountable: JSON.parse(data[0].accountable),
               informed: JSON.parse(data[0].informed)
             }
-          }
-        })
-  }
+          };
+        });
+  };
   handleQueryChange = property => event => {
     const value = event.target.checked
       ? event.target.checked
-      : event.target.value
+      : event.target.value;
     this.setState(prevState => {
       return {
         isModified: true,
         query: { ...prevState.query, [property]: value }
-      }
-    })
-  }
+      };
+    });
+  };
 }

@@ -44,7 +44,7 @@ export default class QueryList extends React.Component {
         </IconButton>
         <div className="listHeader">
           {!isSearchActive && (
-            <Typography variant="headline" className="headline">
+            <Typography variant="h5" className="headline">
               {title}
             </Typography>
           )}
@@ -113,7 +113,7 @@ export default class QueryList extends React.Component {
         });
       }),
       ajax({
-        sp: "get_person_list_with_stat",
+        sp: "get_person",
         person_id: this.props.match.params.person_id
       }).then(data => {
         this.setState({
