@@ -8,3 +8,9 @@
 
 Try demo at [https://data-quality.ru](https://data-quality.ru)
 
+## Architecture
+### Context Diagram
+<img src="./docs/c1.svg">
+
+### Container Diagram
+<img src="./docs/c2.svg">
