@@ -4,8 +4,7 @@ import indigo from "@material-ui/core/colors/indigo";
 
 export const PRIMARY_COLOR = "#549beb";
 
-//export const WS_URL = "https://data-quality.ru/";
-export const WS_URL = "https://dqsub.herokuapp.com/";
+export const WS_URL = "https://127.0.0.1:8080/";
 
 export const LOGO_IMG1 =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfiCwoSIQAcCKOhAAADrUlEQVRo3u2ZT2hTWRTGv5vGVLAwiN0oVKUIjdQZrUqx1IqgqIiMYNGFG0tnwMGNI7hw4UrBhUsRDKIoLqoboaIFEQRBqBYpKKUoWgIdVOykMojiv9H8XPT1viTv+pq/1sU7q8M53/ne7yYv974k0s8U9DLMILuL1u9liCH2Fq3fzSDD9H6vvYHpaCnKrs3q24rSt1j9Br8ay1H8abM/ilrQX44sLHxX/0p5AIsdWVgscWRh4fSPFTVaw4gAIoAIIALIBcCRVTOc/rkA/9rsv5oA+K4TQbg2buBHlj6aZ1zQTau/OaO2mT6yOVe4xorc9i7+pzDesr5aAKznbcD/E79Pt7fxGYBHHKSDLg7zzENorwYA7d7ln3GYLjo4yCMPYask4owBcJI5dmQe5wEYqgrAEADnmWcrczgJwBhx0QvAQMFQnTe2vVIAtk8thbqC+gAAvaIfIHjL0QFAqmKAFAAdgXozAP0xJSVNmHRg8oE+Skqq0khK+qgHhWWT1oSkZExNksaCc+aL0pKaKgZokpQ2XxydMUlNMaUlOZ6CSWiZpPGKAcYlLSPh6LRISsc0KqmR1kC7SwlJTyoGeCIpoa7AAlvVKGlU7AHgLnnHEvWMArD5+85F3oSbARilPq8a4y4Ae4TxtoULNNj2Au+zcTtsaUXvA7en7ncW2EoDF7ytz0iik3fetnCMnXRzgpcAvHa8MbnG1y3A9VBdK68BeMkJutnJMW/re0fntKSTN4G9OsPKUNu53lYCMMDcUO1KMgH/N/byksRSznknAsAHTrEo1LKH53l2z+kJ1S/iFB+s+jPnWBoUHbGCUDOJo1b5nvc2PzrDVI9VHnEL+q0gFWq031NdZDVx4qzmolfZHzqXsv79bsEdK7gSYtNABsjSnVftJgtk/E+SY/KK9b/jV0t/KD2gRklnzNXcormqM5IadaBUu9IBpp6Tjgfqx3O6NQVISnphXhWWzSu9UBmnZ+kAv0iadHYmvW6NAR5LWh483UhoudetMcCIpIR2BOo7lPC6NQY4q6yk08zPW/98nZaU1dmaA5gRXZa0UPf8h3badU8LJfWZkl+BeMmvgPS3ftOvatEg9zUsaY3WqU7SiA6VblYGgJlkk25plerUKf9Ee6gtZrJ0t7K+npuM1mqfntrCU+3TWpMpx6vM3wfMV3NJ/pGVMpfM1/KcKvmBYqMj+6EA9Y7shwJUJSKACCACiAAigJ8K4B9HFhbjjiwsZvKfnb9u8yWz++f17MQ3n1Bnq6qRjCMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMTEtMTBUMTg6MzM6MDArMDE6MDD7fIHuAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTExLTEwVDE4OjMzOjAwKzAxOjAwiiE5UgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII=";
@@ -15,8 +14,8 @@ export const LOGO_IMG =
 export const theme = createMuiTheme({
   palette: {
     primary: blue,
-    secondary: indigo
-  }
+    secondary: indigo,
+  },
 });
 export const requiredQueryFieds = [
   "query_name",
@@ -24,5 +23,5 @@ export const requiredQueryFieds = [
   "target_id",
   "datasource_id",
   "query_status_id",
-  "error_report_script"
+  "error_report_script",
 ];
