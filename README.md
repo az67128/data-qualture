@@ -69,7 +69,7 @@ const config = {
 ```
 run commands
 ```
-$ /ws/ npm instal
+$ /ws/ npm install
 $ /ws/ npm start
 ```
 
@@ -87,7 +87,7 @@ export const WS_URL = "https://127.0.0.1:8080/"; // link to your web service
 ```
 run commands
 ```
-$ /web/ npm instal
+$ /web/ npm install
 $ /web/ npm run build
 ```
 
