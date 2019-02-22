@@ -6,7 +6,7 @@
 3. Statistics and analytics.
 4. Simple. Really simple.
 
-Try demo at [https://data-quality.ru](https://data-quality.ru)
+#### Try [demo](https://0pnzxj1wjw.codesandbox.io/)
 
 ## Architecture
 ### Context Diagram
