@@ -18,7 +18,7 @@
 ## Installation
 ### Database
 Required PostreSQL^9.1
-Execute sripts:
+Execute scripts:
 + /db/createDb.sql
 + /db/data1.sql
 + /db/data2.sql
@@ -58,8 +58,8 @@ const config = {
       },
     },
     from: '"Data Quality Team" <dq@yourhost.com>', // email for notifications 
-    startHour: 15, // when to send notifictions, UTC 0
-    startMinute: 33, // when to send notifictions, UTC 0
+    startHour: 15, // when to send notifications, UTC 0
+    startMinute: 33, // when to send notifications, UTC 0
     systemUrl: "https://yourhost.com", // Link to your system. Used to make links in notifications 
   },
   cors: {
@@ -73,9 +73,9 @@ $ /ws/ npm install
 $ /ws/ npm start
 ```
 
-Next demonize node process. PM2 recommended
+Next demonize node process. [PM2](https://github.com/Unitech/pm2) recommended
 
-Reverse proxy required to host node.js application. Use nginx for linux systems. Use IIS if you need NTL windows authorization
+Reverse proxy required to host node.js application. Use nginx for linux systems. Use IIS if you need NTLM windows authorization
 
 ### Web interface
 
@@ -91,9 +91,9 @@ $ /web/ npm install
 $ /web/ npm run build
 ```
 
-Move files from /web/build to your web interface serverver
+Move files from /web/build to your web interface server www root folder
 
-### Final touchapp
+### Final touch up
 + Open web interface
 + Create new user
 + Grant admin = true in database. Example:
